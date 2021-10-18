@@ -5,16 +5,15 @@
             $nameEntry = empty($_POST["nameInput"]) ? '' : $_POST["nameInput"];
             $handle = fopen("namestore.txt","r+");
 
-            $explodedName = explode(" ",$nameEntry);
-            $firstName = $explodedName[1] ?? "";
-            $lastName = $explodedName[0] ?? "";
-            $nameFormatted = $lastName . ", " . $firstName . "<br>";
-
             if (isset($_POST['clearButton'])){
                 file_put_contents("namestore.txt","");
             
                 return fread($handle,1000);
             }else{
+                $explodedName = explode(" ",$nameEntry);
+                $firstName = $explodedName[0] ?? "";
+                $lastName = $explodedName[1] ?? "";
+                $nameFormatted = $lastName . ", " . $firstName . "<br>";
 
                 file_put_contents("namestore.txt",$nameFormatted,FILE_APPEND);
                 $strContents = fread($handle,1000);
